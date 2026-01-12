@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laurence Merel - Directrice Adjointe Crèche</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        creche: {
+                            rose: '#D4A5A5',   // Vieux rose rassurant
+                            darkrose: '#9D6B6B',
+                            sage: '#9EB29E',   // Vert sauge (Santé/Nature)
+                            dark: '#4A4A4A',   // Texte gris foncé (plus doux que noir)
+                            light: '#FDFBF7',  // Fond coquille d'oeuf
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Lato', 'sans-serif'],     // Texte courant
+                        display: ['Quicksand', 'sans-serif'], // Titres ronds
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { overflow: hidden; }
+        .slide-container {
+            height: 100vh;
+            width: 100vw;
+            overflow-y: hidden;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+        .slide {
+            height: 100vh;
+            width: 100vw;
+            scroll-snap-align: start;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        /* Animations */
+        .fade-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; transform: translateY(30px); }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        
+        /* Overlays */
+        .overlay-soft { background: linear-gradient(135deg, rgba(212, 165, 165, 0.9), rgba(253, 251, 247, 0.7)); }
+        .overlay-green { background: linear-gradient(135deg, rgba(158, 178, 158, 0.9), rgba(74, 74, 74, 0.8)); }
+        
+        /* Cards & Tabs */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .skill-pill {
+            background: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: #9D6B6B;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: inline-block;
+            margin: 4px;
+        }
+
+        /* Image Profile Cercle */
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-creche-light text-creche-dark">
+
+    <!-- Navigation -->
+    <div class="fixed bottom-8 right-8 z-50 flex gap-4">
+        <button onclick="prevSlide()" class="p-4 bg-white shadow-xl rounded-full hover:bg-creche-rose hover:text-white transition text-creche-dark border border-gray-100"><i class="fa-solid fa-chevron-up"></i></button>
+        <button onclick="nextSlide()" class="p-4 bg-creche-sage text-white shadow-xl rounded-full hover:bg-green-600 transition"><i class="fa-solid fa-chevron-down"></i></button>
+    </div>
+
+    <!-- Logo Fixe -->
+    <div class="fixed top-6 left-8 z-50 bg-white px-5 py-2 rounded-full shadow-sm flex items-center gap-3">
+        <img src="logo-neuilly.png" alt="Mairie Neuilly" class="h-8 object-contain">
+        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest border-l pl-3">Candidature</span>
+    </div>
+
+    <div class="slide-container" id="scroller">
+
+        <!-- SLIDE 1 : HERO (Introduction Douce) -->
+        <section class="slide relative">
+            <div class="absolute inset-0 z-0">
+                <img src="creche-bg.jpg" class="w-full h-full object-cover">
+                <div class="absolute inset-0 overlay-soft"></div>
+            </div>
+
+            <div class="relative z-10 max-w-5xl w-full px-6 text-center md:text-left flex flex-col md:flex-row items-center gap-12">
+                
+                <!-- Photo -->
+                <div class="fade-up shrink-0">
+                    <img src="photo-laurence.jpg" alt="Laurence Merel" class="profile-pic w-48 h-48 md:w-64 md:h-64 mx-auto md:mx-0">
+                </div>
+
+                <!-- Texte -->
+                <div class="fade-up delay-1">
+                    <div class="inline-block px-4 py-1 bg-white/50 backdrop-blur rounded-full text-sm font-bold text-creche-darkrose mb-4 uppercase tracking-widest">
+                        Sage-Femme & Accompagnante Parentale
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-display font-bold mb-4 text-creche-dark">
+                        Laurence Merel
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl font-light mb-8 text-gray-700">
+                        Candidate au poste de <span class="font-bold text-creche-darkrose border-b-4 border-creche-sage/50">Directrice Adjointe de Crèche</span>
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-2xl italic">
+                        "Mettre 20 ans d'expertise médicale et humaine au service de la sécurité affective des enfants de Neuilly-sur-Seine."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2 : LE PIVOT (Le Pourquoi) -->
+        <section class="slide bg-white">
+            <div class="max-w-6xl w-full px-6">
+                <h2 class="text-4xl font-display font-bold text-creche-darkrose mb-12 fade-up text-center">
+                    Du Soin Hospitalier à la Crèche
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 fade-up delay-1 items-center">
+                    <!-- Parcours -->
+                    <div class="relative pl-8 border-l-4 border-creche-rose space-y-8">
+                        <div>
+                            <span class="text-5xl font-display text-creche-rose/20 absolute -z-10 -top-4 left-2">20 ans</span>
+                            <h3 class="text-xl font-bold text-creche-dark">Sage-Femme Hospitalière (CHU)</h3>
+                            <p class="text-gray-600 mt-2">
+                                Gestion de l'urgence, soins aux nouveau-nés, accompagnement de familles en grande vulnérabilité.
+                                <br><span class="text-sm text-creche-darkrose font-bold">Acquis : Rigueur clinique, Calme, Résistance au stress.</span>
+                            </p>
+                        </div>
+                        <div>
+                            <span class="text-5xl font-display text-creche-rose/20 absolute -z-10 -top-4 left-2">2021</span>
+                            <h3 class="text-xl font-bold text-creche-dark">Thérapie Parentale & Shiatsu</h3>
+                            <p class="text-gray-600 mt-2">
+                                Approche globale de l'enfant et du parent. Prévention et soutien à la parentalité.
+                                <br><span class="text-sm text-creche-darkrose font-bold">Acquis : Écoute active, Bienveillance, Observation fine.</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Motivation -->
+                    <div class="glass-card p-8 bg-creche-light">
+                        <i class="fa-solid fa-quote-left text-4xl text-creche-sage mb-4"></i>
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                            Mon vécu de mère et de soignante m'a appris à comprendre les réalités du quotidien parental. Aujourd'hui, je souhaite m'investir dans la <strong>continuité</strong> et la <strong>prévention</strong> au sein d'une structure d'accueil.
+                        </p>
+                        <p class="text-lg text-gray-700 leading-relaxed">
+                            Je ne viens pas seulement soigner, je viens <strong>accompagner le développement</strong> de l'enfant dans un cadre sécurisant.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3 : ADÉQUATION POSTE (Santé & Soins) -->
+        <section class="slide bg-creche-light">
+            <div class="max-w-6xl w-full px-6">
+                <h2 class="text-3xl font-display font-bold text-center mb-4 fade-up">Ma Valeur Ajoutée pour le Poste</h2>
+                <p class="text-center text-gray-500 mb-12 fade-up delay-1">Réponse directe aux missions de la fiche de poste.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-up delay-2">
+                    
+                    <!-- SANTÉ (Cœur de mission adjointe) -->
+                    <div class="glass-card p-8 hover:-translate-y-2 transition duration-300">
+                        <div class="w-14 h-14 bg-creche-sage rounded-full flex items-center justify-center text-white text-2xl mb-6 mx-auto">
+                            <i class="fa-solid fa-stethoscope"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-center mb-3 text-creche-dark">Suivi Santé Expert</h3>
+                        <p class="text-sm text-gray-600 text-center mb-4">
+                            En tant que Sage-Femme, mon expertise médicale du nourrisson dépasse le standard.
+                        </p>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li><i class="fa-solid fa-check text-creche-sage mr-2"></i>Administration médicaments</li>
+                            <li><i class="fa-solid fa-check text-creche-sage mr-2"></i>Suivi vaccinations & PAI</li>
+                            <li><i class="fa-solid fa-check text-creche-sage mr-2"></i>Hygiène & Alimentation</li>
+                        </ul>
+                    </div>
+
+                    <!-- ÉQUIPE (Accompagnement) -->
+                    <div class="glass-card p-8 hover:-translate-y-2 transition duration-300">
+                        <div class="w-14 h-14 bg-creche-rose rounded-full flex items-center justify-center text-white text-2xl mb-6 mx-auto">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-center mb-3 text-creche-dark">Soutien aux Équipes</h3>
+                        <p class="text-sm text-gray-600 text-center mb-4">
+                            20 ans de travail d'équipe hospitalier pour fédérer autour de l'enfant.
+                        </p>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li><i class="fa-solid fa-check text-creche-rose mr-2"></i>Protocoles d'hygiène</li>
+                            <li><i class="fa-solid fa-check text-creche-rose mr-2"></i>Relais de la direction</li>
+                            <li><i class="fa-solid fa-check text-creche-rose mr-2"></i>Gestion de plannings</li>
+                        </ul>
+                    </div>
+
+                    <!-- FAMILLES (Soutien) -->
+                    <div class="glass-card p-8 hover:-translate-y-2 transition duration-300">
+                        <div class="w-14 h-14 bg-gray-400 rounded-full flex items-center justify-center text-white text-2xl mb-6 mx-auto">
+                            <i class="fa-solid fa-hands-holding-child"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-center mb-3 text-creche-dark">Soutien Parental</h3>
+                        <p class="text-sm text-gray-600 text-center mb-4">
+                            Une posture d'écoute fine pour rassurer et orienter les parents.
+                        </p>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li><i class="fa-solid fa-check text-gray-400 mr-2"></i>Accueil & Inclusion</li>
+                            <li><i class="fa-solid fa-check text-gray-400 mr-2"></i>Prévention précoce</li>
+                            <li><i class="fa-solid fa-check text-gray-400 mr-2"></i>Situations fragiles</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4 : POSTURE & PERSONNALITÉ -->
+        <section class="slide bg-white">
+            <div class="max-w-5xl w-full px-6">
+                <div class="flex flex-col md:flex-row gap-12 items-center fade-up">
+                    
+                    <div class="md:w-1/2">
+                        <h2 class="text-4xl font-display font-bold text-creche-darkrose mb-6">
+                            Ma Posture Professionnelle
+                        </h2>
+                        <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                            J'aborde ce poste de Directrice Adjointe avec <strong>humilité</strong> et détermination. Consciente de la spécificité du travail en crèche, je m'appuie sur :
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <span class="text-2xl text-creche-sage"><i class="fa-solid fa-eye"></i></span>
+                                <div>
+                                    <h4 class="font-bold text-creche-dark">Regard Neuf & Complémentaire</h4>
+                                    <p class="text-sm text-gray-500">Une vision médicale hospitalière qui enrichit les pratiques de crèche.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="text-2xl text-creche-rose"><i class="fa-solid fa-heart"></i></span>
+                                <div>
+                                    <h4 class="font-bold text-creche-dark">Maturité & Recul</h4>
+                                    <p class="text-sm text-gray-500">Une gestion calme des urgences et un discernement éprouvé.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="text-2xl text-gray-400"><i class="fa-solid fa-graduation-cap"></i></span>
+                                <div>
+                                    <h4 class="font-bold text-creche-dark">Soif d'Apprendre</h4>
+                                    <p class="text-sm text-gray-500">Curieuse et proactive pour m'adapter aux outils et méthodes de la Mairie.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="md:w-1/2">
+                        <div class="bg-creche-light p-8 rounded-3xl border border-creche-rose/20 relative">
+                            <span class="absolute top-4 right-6 text-6xl text-creche-rose/10"><i class="fa-solid fa-leaf"></i></span>
+                            <h3 class="font-bold text-xl mb-6 text-creche-dark">Mes Compétences Clés</h3>
+                            <div class="flex flex-wrap">
+                                <span class="skill-pill">Santé Publique</span>
+                                <span class="skill-pill">Prévention</span>
+                                <span class="skill-pill">Bienveillance</span>
+                                <span class="skill-pill">Rigueur</span>
+                                <span class="skill-pill">Travail d'équipe</span>
+                                <span class="skill-pill">Pack Office</span>
+                                <span class="skill-pill">Service Public</span>
+                                <span class="skill-pill">Développement de l'enfant</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5 : CONCLUSION -->
+        <section class="slide relative">
+            <div class="absolute inset-0 z-0">
+                <img src="soin.jpg" alt="Soin enfant" class="w-full h-full object-cover grayscale opacity-50">
+                <div class="absolute inset-0 overlay-green"></div>
+            </div>
+
+            <div class="relative z-10 text-center fade-up px-6 text-white">
+                
+                <div class="inline-block p-6 rounded-full bg-white/20 backdrop-blur mb-8 shadow-lg">
+                    <img src="logo-neuilly.png" alt="Neuilly" class="h-16 object-contain brightness-0 invert">
+                </div>
+
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">Prête à m'engager.</h2>
+                <p class="text-xl text-gray-100 mb-10 max-w-2xl mx-auto font-light">
+                    Pour garantir, aux côtés de la Directrice, un accueil optimal et sécurisant pour les familles de Neuilly-sur-Seine.
+                </p>
+                
+                <div class="flex flex-col md:flex-row justify-center gap-6 text-lg">
+                    <a href="mailto:Laurmerel@gmail.com" class="px-8 py-4 bg-white text-creche-dark rounded-full font-bold hover:bg-creche-rose hover:text-white transition shadow-lg flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-envelope"></i> Contacter
+                    </a>
+                    <div class="px-8 py-4 bg-transparent border-2 border-white rounded-full font-bold flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-phone"></i> 07 84 95 82 12
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Script Navigation -->
+    <script>
+        const container = document.getElementById('scroller');
+        const totalSlides = 5;
+        let currentSlide = 0;
+        function scrollToSlide(index) {
+            container.scrollTo({ top: window.innerHeight * index, behavior: 'smooth' });
+            currentSlide = index;
+        }
+        function nextSlide() { if (currentSlide < totalSlides - 1) scrollToSlide(currentSlide + 1); }
+        function prevSlide() { if (currentSlide > 0) scrollToSlide(currentSlide - 1); }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') prevSlide();
+        });
+        container.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            if (e.deltaY > 0) nextSlide(); else prevSlide();
+        }, { passive: false });
+    </script>
+</body>
+</html>
